@@ -1,0 +1,52 @@
+.fondo-color-morado {
+  background-color: $purpura;
+}
+
+.atencion {
+  h1 {
+    margin: 0;
+    color: $lila-pastel;
+    font-size: 40px;
+    font-weight: normal;
+  }
+  p {
+    margin: 0;
+    margin-top: 1.5rem;
+    color: $lila-pastel;
+  }
+  .contenedor-imagen {
+    padding: 4rem 0;
+  }
+}
+
+.informacion-enfermeros {
+  a {
+    font-family: $fuente_principal;
+    font-size: 18px;
+    color: rgb(71, 70, 70);
+  }
+  hr {
+    margin-top: 0;
+  }
+  .tab {
+    overflow: hidden;
+    /* Estilos para los enlaces de las pestañas */
+    a {
+      margin: 0;
+      display: inline-block;
+      margin-right: 1rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.4s ease-in-out;
+    }
+
+    .active {
+      color: black;
+      border-bottom: 1px solid black;
+    }
+  }
+
+  /* Estilos para el contenido de las pestañas */
+  .tabcontent {
+    display: none;
+  }
+}

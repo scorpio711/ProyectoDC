@@ -1,0 +1,51 @@
+@font-face {
+  font-family: "Soehne";
+  src: url("../fonts/soehne-bold.woff2") format("woff2"),
+    url("../fonts/soehne-bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Soehne";
+  src: url("../fonts/soehne-regular.woff2") format("woff2"),
+    url("../fonts/soehne-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url("fonts/Signifier-UISerif.woff2");
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+// Fuentes
+$fuente_principal: "Soehne", sans-serif;
+$fuente_secundaria: "Signifier", serif;
+
+// Tamaño de Media Queries
+$telefono: 560px;
+$tablet: 768px;
+$desktop: 1024px;
+
+// Colores
+$negro: #000000;
+$verde: #106c55;
+$pastel: #f5f5dc;
+$gris: #c0c0c0;
+$grisOscuro: #333333;
+$amarillo: #ffff00;
+$azul: #000080;
+$piel: #f0b27a;
+$blanco: #ffffff;
+$purpura: #6C3483;
+$verde-agua: #17a589;
+$cian: #00FFFF;
+$lila-pastel: #B9B1D1;
+
+$separacion: 5rem;
+
+// Fuentes
+$delgada: 300;
+$regular: 400;
+$bold: 700;
+$black: 900;

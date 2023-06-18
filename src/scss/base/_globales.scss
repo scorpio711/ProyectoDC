@@ -1,0 +1,77 @@
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  font-family: $fuente_principal;
+  font-size: 1.6rem;
+  line-height: 1.8;
+}
+p {
+  color: $negro;
+  font-family: $fuente_principal;
+  font-weight: 500;
+  font-size: 1.6rem;
+}
+.contenedor {
+  width: 98%;
+  max-width: 142rem;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  font-family: $fuente_principal;
+  font-size: 1.8rem;
+}
+
+img,
+picture {
+  width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  margin: calc($separacion / 2) 0;
+}
+
+h1 {
+  font-family: $fuente_principal;
+  font-weight: bold;
+  font-size: 3.8rem;
+  font-style: normal;
+}
+h2 {
+  font-family: $fuente_secundaria;
+  font-weight: normal;
+  font-size: 3.6rem;
+}
+h3 {
+  font-family: $fuente_principal;
+  font-size: 1.8rem;
+}
+h4 {
+  font-family: $fuente_principal;
+  font-size: 2.6rem;
+}
+
+
+.boton {
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  padding: 1rem 2rem;
+  &:hover {
+    cursor: pointer;
+    background-color: #000; // Cambia el fondo a color negro al pasar el cursor
+    color: #fff; // Cambia el color del texto a blanco al pasar el cursor
+  }
+}

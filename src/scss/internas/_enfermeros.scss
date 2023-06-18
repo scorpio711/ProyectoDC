@@ -1,0 +1,20 @@
+.fondo-color-azul {
+  background-color: $azul;
+  min-height: 90rem;
+}
+
+.atencion-enfermeros {
+    h1 {
+      margin: 0;
+      color: $blanco;
+      font-size: 40px;
+      font-weight: normal;
+    }
+    p {
+      margin: 0;
+      font-size: 20px;
+      margin-top: 1.5rem;
+      color: $blanco;
+    }
+  }
+  

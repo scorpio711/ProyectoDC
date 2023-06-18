@@ -1,0 +1,18 @@
+.fondo-color-piel {
+  background-color: $piel;
+  min-height: 80rem;
+}
+
+.atencion-juridica {
+  h1 {
+    margin: 0;
+    color: $azul;
+    font-size: 40px;
+    font-weight: normal;
+  }
+  p {
+    margin: 0;
+    margin-top: 1.5rem;
+    color: $azul;
+  }
+}
