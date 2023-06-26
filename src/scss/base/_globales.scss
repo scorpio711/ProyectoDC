@@ -13,21 +13,20 @@ body {
   line-height: 1.8;
 }
 p {
-  color: $negro;
+  margin: 0;
   font-family: $fuente_principal;
-  font-weight: 500;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
 }
 .contenedor {
-  width: 98%;
-  max-width: 142rem;
+  width: 96%;
+  max-width: 147rem;
   margin: 0 auto;
 }
 
 a {
   text-decoration: none;
   font-family: $fuente_principal;
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
 img,
@@ -36,32 +35,36 @@ picture {
   display: block;
 }
 
-h1,
-h2,
-h3 {
-  margin: calc($separacion / 2) 0;
-}
-
 h1 {
   font-family: $fuente_principal;
   font-weight: bold;
-  font-size: 3.8rem;
-  font-style: normal;
+  font-size: 4.2rem;
+  @include tablet {
+    font-size: 5.5rem;
+  }
 }
 h2 {
   font-family: $fuente_secundaria;
   font-weight: normal;
   font-size: 3.6rem;
+  line-height: 1.2;
+  @include tablet {
+    font-size: 4.8rem;
+  }
+  margin: 0;
 }
 h3 {
   font-family: $fuente_principal;
-  font-size: 1.8rem;
+  font-size: 2.1rem;
+  margin: 0;
+  @include tablet {
+    font-size: 2.8rem;
+  }
 }
 h4 {
   font-family: $fuente_principal;
   font-size: 2.6rem;
 }
-
 
 .boton {
   border: 1px solid white;
@@ -75,3 +78,73 @@ h4 {
     color: #fff; // Cambia el color del texto a blanco al pasar el cursor
   }
 }
+
+.espacio {
+  min-height: 8rem;
+}
+
+.mt-spacing {
+  margin-top: 1rem;
+}
+
+.borde-superior-negro-delgado {
+  @include borde-superior(1px, black);
+}
+
+.borde-superior-blanco-delgado {
+  @include borde-superior(1px, white);
+}
+
+//Displays
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+//contenedores
+
+.contenedor-1 {
+  display: flex;
+  flex-direction: column;
+  @include tablet {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.contenedor-texto-2 {
+  display: flex;
+  flex-direction: column;
+  @include tablet {
+    margin-right: 2rem;
+  }
+  @include desktop {
+    margin-right: 20rem;
+  }
+}
+
+.contenedor-multiple {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @include telefono {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  a {
+    margin: 1rem;
+    .nombre-investigacion {
+      font-weight: 600;
+    }
+    &:hover {
+      .nombre-investigacion {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+

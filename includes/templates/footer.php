@@ -21,13 +21,13 @@
           <a href="/psicologico.php">Psicologica</a>
         </nav>
         <nav class="navegacion-footer">
-          <h3>Conetenidos</h3>
+          <h3>Contenidos</h3>
           <a href="/nosotros.php">Nosotros</a>
           <a href="/donaciones.php">Donaciones</a>
           <a href="/contactanos.php">contactanos</a>
         </nav>
         <nav class="navegacion-footer">
-          <h3>Conetenidos</h3>
+          <h3>Contenidos</h3>
           <a href="/nosotros.php">Nosotros</a>
           <a href="/donaciones.php">Donaciones</a>
           <a href="/contactanos.php">contactanos</a>

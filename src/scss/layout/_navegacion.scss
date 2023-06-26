@@ -62,11 +62,11 @@
   }
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
-//menu
+//menu overlay
 $overlayColor: rgba(0, 0, 0, 0.5);
 
 #overlayMenu {
@@ -90,10 +90,6 @@ $overlayColor: rgba(0, 0, 0, 0.5);
       width: 40rem;
       height: 100%;
       right: 100%;
-    }
-    span {
-      font-size: 2rem;
-      font-weight: normal;
     }
     .subContenedorMenu {
       margin: 0 2rem;

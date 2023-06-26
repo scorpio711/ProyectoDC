@@ -12,97 +12,58 @@
     text-align: center;
     margin: 2rem 16rem;
     color: #f5f5dc;
-    font-size: 5.5rem;
   }
 }
 
-.square-image {
-  object-fit: cover;
-}
-
-.contenedor-multiple {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  @include telefono {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @include desktop {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  a {
-    margin: 1rem;
-    .nombre-investigacion {
-      font-weight: 600;
-    }
-    &:hover {
-      .nombre-investigacion {
-        text-decoration: underline;
-      }
-    }
-  }
-  p {
-    margin: 0;
-  }
-}
-
-.espacio {
-  min-height: 8rem;
-}
-
-.contenedor-texto {
-  margin-bottom: 2rem;
-  @include tablet {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-  h2 {
-    margin-right: 2rem;
-  }
-  p {
-    font-size: 24px;
-    font-weight: 400;
-  }
-  a {
-    color: black;
-    text-decoration: underline;
-    &:hover {
-      text-decoration-color: rgb(191, 176, 176);
-    }
-  }
-}
 .apoyo-comunidad {
-  display: flex;
-  flex-direction: column;
-  .contenedor-imagen {
-    img {
-      max-width: 60rem;
-      max-height: 60rem;
-    }
-  }
+  @include contenedor-texto(black, gray);
+  @include enlace(black, gray);
 }
-.contenido-sobre-nosotros {
-  display: flex;
-  flex-direction: column;
-  @include tablet {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
 
-  h2 {
-    margin-bottom: 0;
-    margin-top: 0;
+.contenido-sobre-nosotros {
+  @include enlace(black, gray);
+}
+
+.tabs-enfermeros {
+  background-color: white;
+  @include contenedor-texto(black, gray);
+  .contenedor-imagen-borde {
+    @include borde(2rem, black);
   }
-  p {
-    font-size: 16px;
-  }
+  @include enlace(black, gray);
+  @include tabs(".tabcontent",gray, black);
+}
+
+.tabs-psicologos {
+  min-height: 90rem;
+  background-color: #390099;
+  border-color: #00ffff;
   .contenedor-texto {
-    display: flex;
-    flex-direction: column;
+    @include borde-superior(1px, #00ffff);
   }
-  .contenedor-imagen {
-    margin-top: 2rem;
+  .contenedor-imagen-borde {
+    @include borde(2rem, #00ffff);
+  }
+  @include contenedor-texto(#00ffff, #068181);
+  @include enlace(#00ffff, #068181);
+  @include tabs(".tabcontent2", #068181, #00ffff);
+}
+
+.tabs-abogados {
+  min-height: 90rem;
+  background-color: #0a0f0d;
+  .contenedor-imagen-borde {
+    @include borde(2rem, white);
+  }
+  @include tabs(".tabcontent3", rgb(132, 132, 132), white);
+  @include enlace(white, rgb(53, 51, 51));
+  @include contenedor-texto(white, rgb(53, 51, 51));
+}
+
+.investigaciones {
+  @include contenedor-texto(black, gray);
+  a,
+  h2 {
+    color: black;
   }
 }

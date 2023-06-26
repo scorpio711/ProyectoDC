@@ -1,51 +1,136 @@
 /** Media Queries **/
 @mixin telefono {
-    @media (min-width: #{$telefono}) {
-        @content;
-    }
+  @media (min-width: #{$telefono}) {
+    @content;
+  }
 }
 
 @mixin tablet {
-    @media (min-width: #{$tablet}) {
-        @content;
-    }
+  @media (min-width: #{$tablet}) {
+    @content;
+  }
 }
-  
+
 @mixin desktop {
-    @media (min-width: #{$desktop}) {
-        @content;
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+@mixin grid($columnas, $espaciado) {
+  display: grid;
+  gap: $espaciado;
+  grid-template-columns: repeat($columnas, 1fr);
+}
+
+@mixin coloresHeader($color1, $color2) {
+  a {
+    color: $color2;
+  }
+  .boton {
+    color: $color2;
+    border-color: $color2;
+    &:hover {
+      color: $color1;
+      background-color: $color2;
     }
-}
-
-@mixin grid($columnas, $espaciado ) {
-    display: grid;
-    gap: $espaciado;
-    grid-template-columns: repeat($columnas, 1fr);
-}
-
-@mixin coloresHeader ($color1, $color2){
-    a {
-        color: $color2;
-      }
-      .boton {
-        color: $color2;
-        border-color: $color2;
-        &:hover {
-          color: $color1;
-          background-color: $color2;
-        }
-      }
+  }
 }
 
 @mixin coloresFooter($color1, $color2) {
-    background-color: $color1;
-    h3 {
-      color: $color2;
+  background-color: $color1;
+  h3 {
+    color: $color2;
+  }
+  a {
+    color: $color2;
+  }
+  hr {
+    border-color: $color2;
+  }
+}
+
+@mixin tabs($tabcontent, $color1, $color2) {
+  h1,
+  p,
+  h3,
+  a {
+    color: $color2;
+  }
+  .tabs {
+    .tab {
+      display: flex;
+      overflow: hidden;
+      border-bottom: 1px solid $color1;
+      gap: 0 0 0 20rem;
+      /* Estilos para los enlaces de las pestañas */
+      li {
+        list-style: none;
+        margin-right: 2rem;
+      }
+      a {
+        color: $color1;
+        padding-bottom: 0.5rem;
+        margin: 0;
+        border: 1px solid transparent;
+        display: inline-block;
+        transition: border-bottom 0.5s;
+      }
+      .active {
+        color: $color2;
+        border-bottom: 1px solid $color2;
+        transition: border-bottom 0.5s ease;
+      }
+    }
+    /* Estilos para el contenido de las pestañas */
+    #{$tabcontent} {
+      display: none;
+    }
+  }
+}
+
+@mixin contenedor-texto($color1, $color2) {
+  .contenedor-texto {
+    padding-top: 1rem;
+    margin-bottom: 2rem;
+    @include tablet {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    h2 {
+      margin-right: 2rem;
+    }
+    p {
+      font-weight: 400;
     }
     a {
-      color: $color2;
+      margin: 0;
+      color: $color1;
+      text-decoration: underline;
+      &:hover {
+        text-decoration-color: $color2;
+      }
     }
-    hr {
-      border-color: $color2;
+  }
+}
+
+@mixin borde-superior($grosor, $color) {
+  border-top: $grosor solid $color;
+}
+
+@mixin enlace($color1, $color2) {
+  .enlace {
+    a {
+      color: $color1;
+      text-decoration: underline;
+      &:hover {
+        text-decoration-color: $color2;
+      }
     }
+  }
+}
+
+@mixin borde($padding, $color) {
+  padding: $padding;
+  border: 1px solid $color;
 }

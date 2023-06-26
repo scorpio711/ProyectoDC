@@ -66,48 +66,43 @@ function cambiarClases(id, nuevaClase) {
   div.classList.add(nuevaClase);
 }
 
-
 //tablist
 document.addEventListener("DOMContentLoaded", function (event) {
-  // Mostrar el contenido del primer tab y agregar la clase "active" al enlace del primer tab
-  var firstTab = document.getElementsByClassName("tablinks")[0];
-  var tabName = firstTab.getAttribute("data-tab");
-  document.getElementById(tabName).style.display = "block";
-  firstTab.className += " active";
+  // // Mostrar el contenido del primer tab y agregar la clase "active" al enlace del primer tab
+  // var firstTab = document.getElementsByClassName("tablinks")[0];
+  // var tabName = firstTab.getAttribute("data-tab");
+  // document.getElementById(tabName).style.display = "block";
+  // firstTab.className += " active";
+
+  function activarTabs(nombre, id) {
+    var tab = document.getElementsByClassName(nombre);
+    var primerTab = tab[0];
+    var tabName = document.getElementById(id);
+    tabName.style.display = "block";
+    primerTab.className += " active";
+  }
+  activarTabs("tab-item-1", "Tab1");
+  activarTabs("tab-item-2", "Tab4");
+  activarTabs("tab-item-3", "Tab7");
 });
 
-function openTab(evt, tabName) {
+function openTab(evt, tabName, contenido, tab) {
   // Ocultar todos los contenidos de las pestañas
   var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
+  tabcontent = document.getElementsByClassName(contenido);
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
 
   // Eliminar la clase "active" de todos los enlaces de pestañas
-  tablinks = document.getElementsByClassName("tablinks");
+  tablinks = document.getElementsByClassName(tab);
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
 
   // Mostrar el contenido de la pestaña seleccionada y agregar la clase "active" al enlace de la pestaña
+
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
 }
 
-
-//click en la tablist
-var clickableTexts = document.getElementsByClassName("clickable-text");
-
-// Recorrer todos los elementos de texto clicables
-for (var i = 0; i < clickableTexts.length; i++) {
-  clickableTexts[i].addEventListener("click", function() {
-    // Eliminar la clase "active" de todos los elementos de texto
-    for (var j = 0; j < clickableTexts.length; j++) {
-      clickableTexts[j].classList.remove("active");
-    }
-
-    // Agregar la clase "active" al elemento de texto que se ha hecho clic
-    this.classList.add("active");
-  });
-}

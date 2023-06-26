@@ -19,34 +19,4 @@
   }
 }
 
-.informacion-enfermeros {
-  a {
-    font-family: $fuente_principal;
-    font-size: 18px;
-    color: rgb(71, 70, 70);
-  }
-  hr {
-    margin-top: 0;
-  }
-  .tab {
-    overflow: hidden;
-    /* Estilos para los enlaces de las pestañas */
-    a {
-      margin: 0;
-      display: inline-block;
-      margin-right: 1rem;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.4s ease-in-out;
-    }
 
-    .active {
-      color: black;
-      border-bottom: 1px solid black;
-    }
-  }
-
-  /* Estilos para el contenido de las pestañas */
-  .tabcontent {
-    display: none;
-  }
-}
