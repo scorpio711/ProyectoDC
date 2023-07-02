@@ -2,264 +2,262 @@
 require "includes/funciones.php";
 incluirTemplate("header");
 ?>
-<script>
-    // Obtener el elemento div mediante su ID
-    var div = document.getElementById("mi-div");
+<div class="container mx-auto p-4 md:py-8">
+    <!--parte rincipal -->
+    <section class="flex flex-col items-center">
+        <div class="flex max-w-xl flex-col items-center pt-8 pb-0 text-center sm:pb-16 lg:pt-32 lg:pb-32">
+            <p class="mb-4 font-semibold text-indigo-500 md:mb-6 md:text-lg xl:text-xl">Estamos orgullosos de presentarte</p>
 
-    // Cambiar la clase del elemento
-    div.removeAttribute("class");
-    div.classList.add("imagen-fondo");
-</script>
+            <h1 class="text-black-800 mb-8 text-4xl font-bold sm:text-5xl md:mb-12 md:text-6xl">Una Plataforma para la Diabetes y la Colostomía</h1>
 
-<main class="principal">
-    <h1>Diabetes y Colostomía: Cuidado Integral y Bienestar</h1>
-    <button class="boton">Accede a nuestro contenido</button>
-</main>
-</div> <!-- cierre imagen de fondo -->
-<div class="contenedor">
-    <div class="espacio"></div>
-    <div class="apoyo-comunidad borde-superior-negro-delgado">
-        <div class="contenedor-texto">
-            <h2>Beneficios de la comunidad de apoyo</h2>
-            <div class="mt-spacing">
-                <p>Conoce los beneficios de unirte a una comunidad de apoyo para personas que viven con diabetes y colostomía.</p>
-                <div class="mt-spacing">
-                    <a href="#">Acceder a atencion</a>
-                </div>
+            <p class="mb-8 leading-relaxed text-gray-500 md:mb-12 xl:text-lg">"Uniendo fuerzas para vivir con pasión y superar los desafíos juntos"</p>
+
+            <div class="flex w-full flex-col gap-2.5 sm:flex-row sm:justify-center">
+                <a href="#" class="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">Comienza ahora</a>
+
+                <a href="#" class="inline-block rounded-lg border bg-white px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base">Aprende</a>
             </div>
         </div>
-        <div class="imagen-rectangular mt-spacing">
-            <img src="/build/img/emma-simpson-mNGaaLeWEp0-unsplash.webp" alt="iamgen apoyo comunidad">
+    </section>
+    <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+    <!-- sobre nosotros -->
+    <div class="bg-white py-6 sm:py-8 lg:py-12">
+        <div class="mx-auto max-w-screen-xl px-4 md:px-8">
+            <div class="grid gap-8 md:grid-cols-2 lg:gap-12">
+                <div>
+                    <div class="h-64 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto">
+                        <img src="https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?auto=format&q=75&fit=crop&w=600&h=750" loading="lazy" alt="Photo by Martin Sanchez" class="h-full w-full object-cover object-center" />
+                    </div>
+                </div>
+
+                <div class="md:pt-8">
+                    <p class="text-center font-bold text-indigo-500 md:text-left">¿Quienes somos nosotros?</p>
+
+                    <h1 class="mb-4 text-center text-2xl font-bold text-gray-800 sm:text-3xl md:mb-6 md:text-left">Cuidando Juntos la Diabetes y la Colostomía</h1>
+
+                    <p class="mb-6 text-gray-500 sm:text-lg md:mb-8">
+                        Nuestra misión es proporcionar apoyo integral y empoderamiento a las personas con diabetes y colostomía, brindándoles información, recursos y una comunidad solidaria. Nos esforzamos por mejorar la calidad de vida de nuestros usuarios al fomentar la educación, el auto-cuidado y la conexión entre pares.<br /><br />
+                        Buscamos romper barreras, eliminar el estigma y promover la inclusión, permitiendo que cada individuo viva una vida plena y saludable, sin importar los desafíos que enfrenten. <a href="#" class="text-indigo-500 underline transition duration-100 hover:text-indigo-600 active:text-indigo-700">Mas sobre nosotros</a>
+                    </p>
+
+                    <h2 class="mb-2 text-center text-xl font-semibold text-gray-800 sm:text-2xl md:mb-4 md:text-left">Sobre Nosotros</h2>
+
+                    <p class="mb-6 text-gray-500 sm:text-lg md:mb-8">En el Equipo de Apoyo D-Care, estamos comprometidos en brindar un apoyo incondicional a las personas que viven con diabetes y colostomía. Somos un grupo de profesionales altamente capacitados y apasionados, dedicados a ofrecer un espacio seguro y comprensivo para aquellos que enfrentan estos desafíos diarios.</p>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="espacio"></div>
-    <div class="contenido-sobre-nosotros borde-superior-negro-delgado contenedor-1">
-        <div class="contenedor-texto-2">
-            <h2>Sobre nosotros</h2>
-            <div class="mt-spacing">
-                <p>Nuestro equipo multidisciplinario está compuesto por abogados, enfermeros y psicólogos dedicados a brindar
-                    un enfoque integral en el cuidado de nuestros clientes. Trabajamos de la mano para ofrecer soluciones
-                    legales, atención médica especializada y apoyo emocional, proporcionando un servicio completo y personalizado.
-                    Nuestro objetivo es brindar el mejor respaldo posible, abordando las necesidades legales, de salud y bienestar
-                    de cada individuo de manera integral y efectiva.</p>
-                <div class="mt-spacing enlace">
-                    <a href="#">Mas Sobre Nosotros<span class="material-icons">call_made</span></a>
-                </div>
-            </div>
-        </div>
-        <div class="contenedor-imagen mt-spacing">
-            <img src="/build/img/dylan-gillis-KdeqA3aTnBY-unsplash.webp" alt="iamgen apoyo comunidad">
-        </div>
-    </div>
+    <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
 
-</div>
-<div class="tabs-enfermeros">
-    <div class="informacion-enfermeros tabs contenedor">
-        <div class="espacio"></div>
-        <div class="contenedor-texto borde-superior-negro-delgado">
-            <h3>Enfermeros</h3>
-            <div class="flex-column mt-spacing">
-                <p>Cuidado integral para tu bienestar físico: Servicios de enfermería para personas con diabetes y colostomía</p>
-                <div class="mt-spacing enlace">
-                    <a href="/enfermeros.php">Obten más informacion</a>
-                </div>
+    <!-- Nuestros servicios -->
+    <div class="bg-white py-6 sm:py-8 lg:py-12">
+        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+            <!-- text - start -->
+            <div class="mb-10 md:mb-16">
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Nuestros Servicios</h2>
+
+                <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">Nuestros servicios abarcan asesoramiento legal, apoyo psicológico y atención médica especializada, proporcionando un enfoque integral para aquellos que viven con diabetes y colostomía.</p>
             </div>
-        </div>
-        <div>
-            <div class="tab">
-                <li>
-                    <a href="javascript:void(0);" class="tablinks tab-item-1" data-tab="Tab1" onclick="openTab(event, 'Tab1', 'tabcontent', 'tab-item-1')">Asesoramiento</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" class="tablinks tab-item-1" onclick="openTab(event, 'Tab2', 'tabcontent', 'tab-item-1')">Monitoreo</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" class="tablinks tab-item-1" onclick="openTab(event, 'Tab3','tabcontent', 'tab-item-1')">Habitos</a>
-                </li>
-            </div>
-            <div id="Tab1" class="tabcontent">
-                <div class="contenedor-1 mt-spacing">
-                    <div class="contenedor-texto-2">
-                        <p>En nuestra página, nos preocupamos por tu bienestar físico y queremos asegurarnos de que recibas el cuidado adecuado para tu diabetes
-                            y colostomía. Nuestro equipo de enfermería especializado está aquí para brindarte servicios de calidad y apoyarte en tu camino hacia una vida saludable y activa.</p>
-                        <div class="enlace">
-                            <a href="/enfermeros.php">Apoyo Enfermeros</a>
+            <!-- text - end -->
+
+            <div class="grid gap-x-4 gap-y-8 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-3">
+                <!-- product - start -->
+                <div>
+                    <a href="#" class="group relative mb-2 block h-96 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3">
+                        <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&q=75&fit=crop&crop=top&w=600&h=700" loading="lazy" alt="Photo by Austin Wade" class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                    </a>
+
+                    <div class="flex items-start justify-between gap-2 px-2">
+                        <div class="flex flex-col">
+                            <h2 class="mb-2 text-lg font-semibold text-gray-800">
+                                <a href="#" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600">Ayuda Juridica</a>
+                            </h2>
+
+                            <p class="mb-8 text-gray-500">Brindamos asesoramiento legal especializado, guiando a las personas con diabetes y colostomía en la protección de sus derechos, beneficios y recursos legales para asegurar su bienestar y calidad de vida.</p>
                         </div>
                     </div>
-                    <div class="contenedor-imagen-borde">
-                        <img src="/build/img/nurse-helping-patient-fotor-2023062317252.webp" alt="imagen enfermeros">
-                    </div>
                 </div>
-            </div>
-            <div id="Tab2" class="tabcontent">
-                <h3>Monitoreo y seguimiento</h3>
-                <p>Realizaremos un seguimiento regular de tu estado de salud, incluyendo la medición de tus niveles de azúcar en la sangre, el control de tu presión arterial y el
-                    monitoreo de cualquier cambio en tu estoma.</p>
-            </div>
+                <!-- product - end -->
 
-            <div id="Tab3" class="tabcontent">
-                <h3>Apoyo práctico</h3>
-                <p>Te enseñaremos técnicas y consejos prácticos para el cuidado de tu colostomía, incluyendo el cambio adecuado de la bolsa y la prevención de infecciones.</p>
-            </div>
-        </div>
-    </div>
-    <div class="espacio"></div>
-</div>
-<div class="tabs-psicologos">
-    <div class="informacion-psicologos tabs contenedor">
-        <div class="espacio"></div>
-        <div class="contenedor-texto">
-            <h3>Psicologos</h3>
-            <div>
-                <p>Cuidando tu bienestar emocional: Apoyo psicológico para personas con diabetes y colostomía</p>
-                <a href="/psicologico.php">Obten mas informacion</a>
-            </div>
-        </div>
 
-        <div>
-            <div class="tab">
-                <li>
-                    <a href="javascript:void(0);" class="tablinks tab-item-2 primer-tab" onclick="openTab(event, 'Tab4','tabcontent2', 'tab-item-2')">Eomociones</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" class="tablinks tab-item-2" onclick="openTab(event, 'Tab5','tabcontent2', 'tab-item-2')">Afronta</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" class="tablinks tab-item-2" onclick="openTab(event, 'Tab6','tabcontent2', 'tab-item-2')">Vida</a>
-                </li>
-            </div>
+                <!-- product - start -->
+                <div>
+                    <a href="#" class="group relative mb-2 block h-96 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3">
+                        <img src="https://images.unsplash.com/photo-1548286978-f218023f8d18?auto=format&q=75&fit=crop&crop=top&w=600&h=700" loading="lazy" alt="Photo by Austin Wade" class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                    </a>
 
-            <div id="Tab4" class="tabcontent2">
-                <div class="contenedor-1 mt-spacing">
-                    <div class="contenedor-texto-2">
-                        <p>En nuestra página, nos preocupamos por tu bienestar físico y queremos asegurarnos de que recibas el cuidado adecuado para tu diabetes
-                            y colostomía. Nuestro equipo de enfermería especializado está aquí para brindarte servicios de calidad y apoyarte en tu camino hacia una vida saludable y activa.</p>
-                        <div class="enlace">
-                            <a href="/enfermeros.php">Apoyo Enfermeros</a>
+                    <div class="flex items-start justify-between gap-2 px-2">
+                        <div class="flex flex-col">
+                            <h2 class="mb-2 text-lg font-semibold text-gray-800">
+                                <a href="#" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600">Apoyo Psicológico</a>
+                            </h2>
+
+                            <p class="mb-8 text-gray-500">Nuestro equipo de psicólogos capacitados ofrece un espacio seguro y confidencial para el apoyo emocional, ayudando a las personas con diabetes y colostomía a enfrentar los desafíos psicológicos, manejar el estrés y fortalecer su resiliencia.</p>
                         </div>
                     </div>
-                    <div class="contenedor-imagen-borde">
-                        <img src="/build/img/quinton-coetzee-lzlJC_ZY0OI-unsplash-fotor-2023062422645.webp" alt="imagen enfermeros">
-                    </div>
                 </div>
-            </div>
+                <!-- product - end -->
 
-            <div id="Tab5" class="tabcontent2">
-                <h3>Contenido de la Pestaña 2</h3>
-                <p>Este es el contenido de la pestaña 2.</p>
-            </div>
+                <!-- product - start -->
+                <div>
+                    <a href="#" class="group relative mb-2 block h-96 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3">
+                        <img src="https://images.unsplash.com/photo-1566207274740-0f8cf6b7d5a5?auto=format&q=75&fit=crop&crop=top&w=600&h=700" loading="lazy" alt="Photo by Vladimir Fedotov" class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                    </a>
 
-            <div id="Tab6" class="tabcontent2">
-                <h3>Contenido de la Pestaña 3</h3>
-                <p>Este es el contenido de la pestaña 3.</p>
-            </div>
-        </div>
-    </div>
-    <div class="espacio"></div>
-</div>
-<div class="tabs-abogados">
-    <div class="informacion-abogados tabs contenedor">
-        <div class="espacio"></div>
-        <div class="contenedor-texto borde-superior-blanco-delgado">
-            <h3>Juridico</h3>
-            <div>
-                <p>Protegiendo tus derechos: Asesoría jurídica para personas con diabetes y colostomía</p>
-                <a href="/juridico.php">Obten informacion</a>
-            </div>
-        </div>
-        <div>
-            <div class="tab">
-                <li>
-                    <a href="javascript:void(0);" class="tablinks tab-item-3" data-tab="Tab7" onclick="openTab(event, 'Tab7', 'tabcontent3', 'tab-item-3')">Expertos</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" class="tablinks tab-item-3" onclick="openTab(event, 'tab8', 'tabcontent3', 'tab-item-3')">Defensa</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" class="tablinks tab-item-3" onclick="openTab(event, 'Tab9', 'tabcontent3', 'tab-item-3')">Orientacion</a>
-                </li>
-            </div>
-            <div id="Tab7" class="tabcontent3">
-                <div class="contenedor-1 mt-spacing">
-                    <div class="contenedor-texto-2">
-                        <p>En nuestra página, nos preocupamos por tu bienestar físico y queremos asegurarnos de que recibas el cuidado adecuado para tu diabetes
-                            y colostomía. Nuestro equipo de enfermería especializado está aquí para brindarte servicios de calidad y apoyarte en tu camino hacia una vida saludable y activa.</p>
-                        <div class="enlace">
-                            <a href="/enfermeros.php">Apoyo Enfermeros</a>
+                    <div class="flex items-start justify-between gap-2 px-2">
+                        <div class="flex flex-col">
+                            <h2 class="mb-2 text-lg font-semibold text-gray-800">
+                                <a href="#" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600">Atención Médica</a>
+                            </h2>
+
+                            <p class="mb-8 text-gray-500">Proporcionamos atención médica personalizada y especializada, trabajando en colaboración con médicos expertos en diabetes y colostomía para ofrecer un enfoque integral en el cuidado de la salud física, el manejo de la enfermedad y la promoción del bienestar general.</p>
                         </div>
                     </div>
-                    <div class="contenedor-imagen-borde">
-                        <img src="/build/img/hunters-race-MYbhN8KaaEc-unsplash-fotor-2023062422815.webp" alt="imagen enfermeros">
+                </div>
+                <!-- product - end -->
+            </div>
+        </div>
+    </div>
+    <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+
+    <!-- Investigaciones -->
+    <div class="bg-white py-6 sm:py-8 lg:py-12">
+        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+            <!-- text - start -->
+            <div class="mb-10 md:mb-16">
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Nuestras Investigaciones</h2>
+
+                <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">Nuestras investigaciones se centran en avanzar en la comprensión de la diabetes y la colostomía, así como en mejorar los tratamientos y la calidad de vida de las personas afectadas. A través de rigurosos estudios científicos, buscamos descubrir nuevos enfoques médicos, terapéuticos y tecnológicos para el manejo de estas condiciones. </p>
+            </div>
+            <!-- text - end -->
+
+            <div class="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
+                <!-- article - start -->
+                <div class="flex flex-col overflow-hidden rounded-lg border bg-white">
+                    <a href="#" class="group relative block h-48 overflow-hidden bg-gray-100 md:h-64">
+                        <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Minh Pham" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                    </a>
+
+                    <div class="flex flex-1 flex-col p-4 sm:p-6">
+                        <h2 class="mb-2 text-lg font-semibold text-gray-800">
+                            <a href="#" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600">New trends in Tech</a>
+                        </h2>
+
+                        <p class="mb-8 text-gray-500">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text.</p>
+
+                        <div class="mt-auto flex items-end justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-100">
+                                    <img src="https://images.unsplash.com/photo-1611898872015-0571a9e38375?auto=format&q=75&fit=crop&w=64" loading="lazy" alt="Photo by Brock Wegner" class="h-full w-full object-cover object-center" />
+                                </div>
+
+                                <div>
+                                    <span class="block text-indigo-500">Mike Lane</span>
+                                    <span class="block text-sm text-gray-400">July 19, 2021</span>
+                                </div>
+                            </div>
+
+                            <span class="rounded border px-2 py-1 text-sm text-gray-500">Article</span>
+                        </div>
                     </div>
                 </div>
+                <!-- article - end -->
+
+                <!-- article - start -->
+                <div class="flex flex-col overflow-hidden rounded-lg border bg-white">
+                    <a href="#" class="group relative block h-48 overflow-hidden bg-gray-100 md:h-64">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Lorenzo Herrera" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                    </a>
+
+                    <div class="flex flex-1 flex-col p-4 sm:p-6">
+                        <h2 class="mb-2 text-lg font-semibold text-gray-800">
+                            <a href="#" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600">Working with legacy stacks</a>
+                        </h2>
+
+                        <p class="mb-8 text-gray-500">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text.</p>
+
+                        <div class="mt-auto flex items-end justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-100">
+                                    <img src="https://images.unsplash.com/photo-1586116104126-7b8e839d5b8c?auto=format&q=75&fit=crop&w=64" loading="lazy" alt="Photo by peter bucks" class="h-full w-full object-cover object-center" />
+                                </div>
+
+                                <div>
+                                    <span class="block text-indigo-500">Jane Jackobs</span>
+                                    <span class="block text-sm text-gray-400">April 07, 2021</span>
+                                </div>
+                            </div>
+
+                            <span class="rounded border px-2 py-1 text-sm text-gray-500">Article</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- article - end -->
+
+                <!-- article - start -->
+                <div class="flex flex-col overflow-hidden rounded-lg border bg-white">
+                    <a href="#" class="group relative block h-48 overflow-hidden bg-gray-100 md:h-64">
+                        <img src="https://images.unsplash.com/photo-1542759564-7ccbb6ac450a?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Magicle" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                    </a>
+
+                    <div class="flex flex-1 flex-col p-4 sm:p-6">
+                        <h2 class="mb-2 text-lg font-semibold text-gray-800">
+                            <a href="#" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600">10 best smartphones for devs</a>
+                        </h2>
+
+                        <p class="mb-8 text-gray-500">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text.</p>
+
+                        <div class="mt-auto flex items-end justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-100">
+                                    <img src="https://images.unsplash.com/photo-1592660503155-7599a37f06a6?auto=format&q=75&fit=crop&w=64" loading="lazy" alt="Photo by Jassir Jonis" class="h-full w-full object-cover object-center" />
+                                </div>
+
+                                <div>
+                                    <span class="block text-indigo-500">Tylor Grey</span>
+                                    <span class="block text-sm text-gray-400">March 15, 2021</span>
+                                </div>
+                            </div>
+
+                            <span class="rounded border px-2 py-1 text-sm text-gray-500">Article</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- article - end -->
+
+                <!-- article - start -->
+                <div class="flex flex-col overflow-hidden rounded-lg border bg-white">
+                    <a href="#" class="group relative block h-48 overflow-hidden bg-gray-100 md:h-64">
+                        <img src="https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Martin Sanchez" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                    </a>
+
+                    <div class="flex flex-1 flex-col p-4 sm:p-6">
+                        <h2 class="mb-2 text-lg font-semibold text-gray-800">
+                            <a href="#" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600">8 High performance Notebooks</a>
+                        </h2>
+
+                        <p class="mb-8 text-gray-500">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text.</p>
+
+                        <div class="mt-auto flex items-end justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-100">
+                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&q=75&fit=crop&w=64" loading="lazy" alt="Photo by Aiony Haust" class="h-full w-full object-cover object-center" />
+                                </div>
+
+                                <div>
+                                    <span class="block text-indigo-500">Ann Park</span>
+                                    <span class="block text-sm text-gray-400">January 27, 2021</span>
+                                </div>
+                            </div>
+
+                            <span class="rounded border px-2 py-1 text-sm text-gray-500">Article</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- article - end -->
             </div>
         </div>
-
-        <div id="tab8" class="tabcontent3">
-            <h3>Contenido de la Pestaña 2</h3>
-            <p>Este es el contenido de la pestaña 2.</p>
-        </div>
-
-        <div id="Tab9" class="tabcontent3">
-            <h3>Contenido de la Pestaña 3</h3>
-            <p>Este es el contenido de la pestaña 3.</p>
-        </div>
-    </div>
-    <div class="espacio"></div>
-</div>
-</div>
-<div class="contenedor">
-    <div class="espacio"></div>
-    <div class="investigaciones borde-superior-negro-delgado">
-        <div class="contenedor-texto">
-            <h2>Nuestras investigaciones</h2>
-            <div class="mt-spacing">
-                <p>Las investigaciones en el cuidado de la diabetes y la colostomía buscan mejorar la calidad de vida y
-                    encontrar soluciones innovadoras para quienes viven con estas condiciones.</p>
-                <div class="mt-spacing">
-                    <a href="#">Aprende sobre nuestras investigaciones</a>
-                </div>
-            </div>
-        </div>
-        <div class="contenedor-multiple">
-            <a href="#">
-                <div class="contenedor-imagen">
-                    <img src="/build/img/foto-grid3.webp" class="square-image" alt="">
-                </div>
-                <div>
-                    <p class="nombre-investigacion">Adaptación a la colostomía</p>
-                    <p>Mar 15, 2023</p>
-                </div>
-            </a>
-            <a href="#">
-                <div class="contenedor-imagen">
-                    <img src="/build/img/foto-grid1.webp" class="square-image" alt="">
-                </div>
-                <div>
-                    <p class="nombre-investigacion">Cuidado de la piel</p>
-                    <p>Mar 15, 2023</p>
-                </div>
-            </a>
-            <a href="#">
-                <div class="contenedor-imagen">
-                    <img src="/build/img/foto-grid2.webp" class="square-image" alt="">
-                </div>
-                <div>
-                    <p class="nombre-investigacion">Ejercicio físico</p>
-                    <p>Mar 15, 2023</p>
-                </div>
-            </a>
-            <a href="#">
-                <div class="contenedor-imagen">
-                    <img src="/build/img/foto-grid4.webp" class="square-image" alt="">
-                </div>
-                <div>
-                    <p class="nombre-investigacion">Alimentación saludable</p>
-                    <p>Mar 15, 2023</p>
-                </div>
-            </a>
-        </div>
     </div>
 </div>
-<div class="espacio"></div>
+
 <?php incluirTemplate("footer") ?>
