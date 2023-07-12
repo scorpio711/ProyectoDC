@@ -1,9 +1,7 @@
 <?php
-require "includes/funciones.php";
+require "includes/app.php";
 $inicio = true;
 
-//importatr conexion
-require "includes/config/database.php";
 $db = conectarDB();
 
 //Crear el email y el password

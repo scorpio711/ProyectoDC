@@ -1,10 +1,6 @@
 <?php
-require "../includes/funciones.php";
-$auth = estaAutenticado();
-
-if (!$auth) {
-    header("location:/");
-}
+require "../includes/app.php";
+estaAutenticado();
 
 incluirTemplate("header");
 ?>
