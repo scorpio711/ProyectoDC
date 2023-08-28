@@ -8,7 +8,7 @@ module.exports = {
     "./**/*.php", // Archivos PHP en la raíz del proyecto
     "./node_modules/flowbite/**/*.js",
   ],
-  darkMode: "class",
+  darkMode: "media",
   theme: {
     extend: {
       colors: {

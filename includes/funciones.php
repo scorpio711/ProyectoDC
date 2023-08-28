@@ -35,3 +35,9 @@ function s($html): string
     $s = htmlspecialchars($html);
     return $s;
 }
+
+// Validar contenido
+function validarTipoContenido($tipo){
+    $tipos = ["usuario", "investigacion"];
+    return in_array($tipo, $tipos);
+}

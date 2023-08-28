@@ -1,20 +1,25 @@
 <?php
+
 require "../../includes/app.php";
+
 estaAutenticado();
 
-use App\Investigacion;
+
+use App\Usuario;
 use Intervention\Image\ImageManagerStatic as Image;
 
+
 //implementar un metodo para obtener todas las propiedades utilizando active record
-$investigaciones = Investigacion::all();
+$usuarios = Usuario::all();
+
 
 
 //base de datos
 $db = conectarDB();
 
 //arreglo con mensajes de errores
-$errores = Investigacion::getErrores();
-$erroresActualizacion = Investigacion::getErrores();
+$errores = Usuario::getErrores();
+$erroresActualizacion = Usuario::getErrores();
 
 
 //Ejecutar el codigo despues de que el usuario envia el formulario
@@ -23,9 +28,9 @@ $erroresActualizacion = Investigacion::getErrores();
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (isset($_POST['crear'])) {
-
         //Crea una nueva instancia
-        $investigacionC = new Investigacion($_POST);
+        $usuariosC = new Usuario($_POST);
+
         /**SUBIDA DE ARCHIVOS**/
 
         //generar un nombre unico
@@ -35,12 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         //Realiza un resize a la imagen con intervention
         if ($_FILES["imagen"]["tmp_name"]) {
             $image = Image::make($_FILES["imagen"]["tmp_name"])->fit(800, 600);
-            $investigacionC->setImagen($nombreImagen);
+            $usuariosC->setImagen($nombreImagen);
         }
 
         //Validar
-        $errores = $investigacionC->validar();
-
+        $errores = $usuariosC->validar();
 
         //revisar que errores este vacio
         if (empty($errores)) {
@@ -54,41 +58,40 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $image->save(CARPETA_IMAGENES . $nombreImagen);
 
             //guarda en la base de datos
-            $investigacionC->crear();
+            $usuariosC->crear();
 
         }
     } elseif (isset($_POST['actualizar'])) {
-
-        $investigacion = new Investigacion($_POST["investigacion"]);
-
+        $usuario = Usuario::find($_POST["id"]);
         //asignar los atributos
-        $args = $_POST["investigacion"];
+        $args = $_POST[$_POST["usuario"]];
 
         //Subida de archivos
         //generar nombre unico
         $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
         $imagenPrevia = $_POST["imagenPrevia"];
 
-        if ($_FILES["investigacion"]["tmp_name"]["imagen"]) {
-            $image = Image::make($_FILES["investigacion"]["tmp_name"]["imagen"])->fit(800, 600);
-            $investigacion->setImagen($nombreImagen);
+        if ($_FILES["usuario"]["tmp_name"]["imagen"]) {
+            $image = Image::make($_FILES["usuario"]["tmp_name"]["imagen"])->fit(800, 600);
+            $usuario->setImagen($nombreImagen);
             $bool = true;
             $existeArchivo = file_exists(CARPETA_IMAGENES . $imagenPrevia);
-            if($existeArchivo) {
+            if ($existeArchivo) {
                 unlink(CARPETA_IMAGENES . $imagenPrevia);
             }
         } else {
-            $investigacion->setImagen($imagenPrevia);
+            $usuario->setImagen($imagenPrevia);
             $bool = false;
         }
-        
-        $investigacion->sincronizar($args);
+
+        $usuario->sincronizar($args);
 
         //Validacion
-        $erroresActualizacion = $investigacion->validar();
+        $erroresActualizacion = $usuario->validar();
 
         //revisar que erroresAc$erroresActualizacion este vacio
         if (empty($erroresActualizacion)) {
+            
             if (!is_dir(CARPETA_IMAGENES)) {
                 mkdir(CARPETA_IMAGENES);
             }
@@ -97,16 +100,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $image->save(CARPETA_IMAGENES . $nombreImagen);
             }
 
-            $investigacion->actualizar();
+            $usuario->actualizar();
 
         }
     } elseif (isset($_POST['borrar'])) {
+        $tipo = $_POST["tipo"];
+        if (validarTipoContenido($tipo)) {
+            $id = $_POST["id"];
+            $usuario = Usuario::find($id);
+            $usuario->eleminar();
+        }
 
-        $id = $_POST["id"];
-        $investigacion = Investigacion::find($id);
-        $investigacion->eleminar();
-
-        unlink(CARPETA_IMAGENES . $investigacion->imagen);
+        unlink(CARPETA_IMAGENES . $usuario->imagen);
     }
 }
 
@@ -114,10 +119,9 @@ $resultado = $_GET["resultado"];
 
 incluirTemplate("header");
 ?>
-<main class="contenedor ">
-<body>
-    
-</body>
+<main class="contenedor">
+
+
     <!-- Start block -->
     <section class="bg-gray-50 mt-24 dark:bg-gray-900 p-3 sm:p-5 antialiased">
         <!-- alerta de investigacion creada-->
@@ -133,7 +137,7 @@ incluirTemplate("header");
                 </svg>
                 <span class="sr-only">Info</span>
                 <div class="ml-3 text-sm font-medium">
-                    La investigacion ha sido creada correctamente
+                    El usuario ha sido creado correctamente
                 </div>
                 <button type="button"
                     class="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
@@ -188,7 +192,7 @@ incluirTemplate("header");
                 </svg>
                 <span class="sr-only">Info</span>
                 <div class="ml-3 text-sm font-medium">
-                    Se ha borrado la investigacion
+                    Se ha borrado el usuario
                 </div>
                 <button type="button"
                     class="ml-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700"
@@ -216,7 +220,7 @@ incluirTemplate("header");
                 </svg>
                 <span class="sr-only">Info</span>
                 <div class="ml-3 text-sm font-medium">
-                    Error al crear la investigacion revisa nuevamente
+                    Error al crear el usuario revisa nuevamente
                 </div>
                 <button type="button"
                     class="ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
@@ -243,7 +247,7 @@ incluirTemplate("header");
                 </svg>
                 <span class="sr-only">Info</span>
                 <div class="ml-3 text-sm font-medium">
-                    Error al actualizar la investigacion revisa nuevamente
+                    Error al actualiza el usuario revisa nuevamente
                 </div>
                 <button type="button"
                     class="ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
@@ -306,41 +310,37 @@ incluirTemplate("header");
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-4">Id</th>
-                                <th scope="col" class="px-4 py-4">Titulo</th>
-                                <th scope="col" class="px-4 py-3">Autor</th>
-                                <th scope="col" class="px-4 py-3">Fecha</th>
-                                <th scope="col" class="px-4 py-3">Resumen</th>
-                                <th scope="col" class="px-4 py-3">imagen</th>
+                                <th scope="col" class="px-4 py-4">email</th>
+                                <th scope="col" class="px-4 py-3">password</th>
+                                <th scope="col" class="px-4 py-3">nombre</th>
+                                <th scope="col" class="px-4 py-3">imagen_perfil</th>
+                                <th scope="col" class="px-4 py-3">fecha_nacimiento</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Actions</span>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($investigaciones as $investigacion): ?>
+                            <?php foreach ($usuarios as $usuario): ?>
                                 <tr class="border-b dark:border-gray-700">
                                     <td class="px-4 py-3">
-                                        <?php echo $investigacion->id; ?>
+                                        <?php echo $usuario->id; ?>
                                     </td>
                                     <th scope="row"
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <?php echo $investigacion->titulo; ?>
+                                        <?php echo $usuario->email; ?>
                                     </th>
                                     <td class="px-4 py-3">
-                                        <?php echo $investigacion->autor; ?>
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <?php echo $fechaFormateada = date("d/m/Y", strtotime($investigacion->fecha_publicacion)); ?>
+                                        <?php echo $usuario->password; ?>
                                     </td>
                                     <td class="px-4 py-3 max-w-[12rem] truncate">
-                                        <?php echo $investigacion->resumen; ?>
+                                        <?php echo $usuario->nombre; ?>
                                     </td>
                                     <td class="px-4 py-3">
-                                        <button data-popover-target="popover-default<?php echo $investigacion->id; ?>"
+                                        <button data-popover-target="popover-default<?php echo $usuario->id; ?>"
                                             type="button"
                                             class="text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-emerald-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">ver</button>
-                                        <div data-popover id="popover-default<?php echo $investigacion->id; ?>"
-                                            role="tooltip"
+                                        <div data-popover id="popover-default<?php echo $usuario->id; ?>" role="tooltip"
                                             class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
                                             <div
                                                 class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
@@ -349,14 +349,17 @@ incluirTemplate("header");
                                             </div>
                                             <div class="px-3 py-2 flex align-center justify-center">
                                                 <img class="w-32 h-auto rounded-2"
-                                                    src="/imagenes/<?php echo $investigacion->imagen; ?>">
+                                                    src="/imagenes/<?php echo $usuario->imagen; ?>">
                                             </div>
                                             <div data-popper-arrow></div>
                                         </div>
                                     </td>
+                                    <td class="px-4 py-3">
+                                        <?php echo $fechaFormateada = date("d/m/Y", strtotime($usuario->fecha_nacimiento)); ?>
+                                    </td>
                                     <td class="px-4 py-3 flex items-center justify-end">
-                                        <button id="apple-imac-27-dropdown-button<?php echo $investigacion->id; ?>"
-                                            data-dropdown-toggle="apple-imac-27-dropdown<?php echo $investigacion->id; ?>"
+                                        <button id="apple-imac-27-dropdown-button<?php echo $usuario->id; ?>"
+                                            data-dropdown-toggle="apple-imac-27-dropdown<?php echo $usuario->id; ?>"
                                             class="inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
                                             type="button">
                                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
@@ -365,13 +368,13 @@ incluirTemplate("header");
                                                     d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                                             </svg>
                                         </button>
-                                        <div id="apple-imac-27-dropdown<?php echo $investigacion->id; ?>"
+                                        <div id="apple-imac-27-dropdown<?php echo $usuario->id; ?>"
                                             class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                             <ul class="py-1 text-sm" aria-labelledby="apple-imac-27-dropdown-button">
                                                 <li>
                                                     <button type="button"
-                                                        data-modal-target="updateProductModal<?php echo $investigacion->id; ?>"
-                                                        data-modal-toggle="updateProductModal<?php echo $investigacion->id; ?>"
+                                                        data-modal-target="updateProductModal<?php echo $usuario->id; ?>"
+                                                        data-modal-toggle="updateProductModal<?php echo $usuario->id; ?>"
                                                         class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                         <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
                                                             viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -385,8 +388,8 @@ incluirTemplate("header");
                                                 </li>
                                                 <li>
                                                     <button type="button"
-                                                        data-modal-target="deleteModal<?php echo $investigacion->id; ?>"
-                                                        data-modal-toggle="deleteModal<?php echo $investigacion->id; ?>"
+                                                        data-modal-target="deleteModal<?php echo $usuario->id; ?>"
+                                                        data-modal-toggle="deleteModal<?php echo $usuario->id; ?>"
                                                         class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400">
                                                         <svg class="w-4 h-4 mr-2" viewbox="0 0 14 15" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -474,7 +477,7 @@ incluirTemplate("header");
                 <!-- Modal header -->
                 <div
                     class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Añadir investigacion</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Añadir Usuario</h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                         data-modal-target="createProductModal" data-modal-toggle="createProductModal">
@@ -506,40 +509,41 @@ incluirTemplate("header");
                 <?php endforeach; ?>
                 <!--cierre alerta -->
                 <!-- Modal body -->
-                <form method="POST" action="/admin/Investigaciones/administrar.php" enctype="multipart/form-data">
+                <form method="POST" action="/admin/Usuarios/administrar.php" enctype="multipart/form-data">
                     <div class="grid gap-4 mb-4 sm:grid-cols-2">
                         <div>
-                            <label for="titulo"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titulo</label>
-                            <input value="<?php echo s($investigacionC->titulo); ?>" type="text" name="titulo"
-                                id="titulo"
+                            <label for="email"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                            <input value="<?php echo s($usuariosC->email); ?>" type="email" name="email" id="email"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Escribe el titulo" required="">
+                                placeholder="Escribe el email" required="">
                         </div>
                         <div>
-                            <label for="autor"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Autor</label>
-                            <input value="<?php echo s($investigacionC->autor); ?>" type="text" name="autor" id="autor"
+                            <label for="nombre"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre
+                                Completo</label>
+                            <input value="<?php echo s($usuariosC->nombre); ?>" type="text" name="nombre" id="nombre"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Nombre del Autor" required="">
+                                placeholder="Escribre tu nombre" required="">
                         </div>
                         <div>
-                            <label for="fecha"
+                            <label for="fecha_nacimiento"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de
-                                Publicacion</label>
-                            <input
-                                value="<?php echo date('Y-m-d', strtotime(s($investigacionC->fecha_publicacion))); ?>"
-                                type="date" name="fecha_publicacion" id="fecha"
+                                nacimiento</label>
+                            <input value="<?php echo date('Y-m-d', strtotime(s($usuariosC->fecha_nacimiento))); ?>"
+                                type="date" name="fecha_nacimiento" id="fecha"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <div class="sm:col-span-2 mt-2"><label for="resumen"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Resumen</label><textarea
-                                    id="resumen" name="resumen" rows="4"
-                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Pon aqui el resumen de la investigacion"><?php echo s($investigacionC->resumen); ?></textarea>
+                            <div class="mt-6">
+                                <label for="password"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                <input value="<?php echo s($usuariosC->password); ?>" type="text" name="password"
+                                    id="password"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    placeholder="password" required="">
                             </div>
                         </div>
                         <div class="flex  flex-col  w-full">
-                            <p class="block mb-2 text-sm font-medium  text-gray-900 dark:text-white">Imagen</p>
+                            <p class="block mb-2 text-sm font-medium  text-gray-900 dark:text-white">Imagen Perfil</p>
                             <label for="imagen"
                                 class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                 <div class=" flex flex-col items-center justify-center pt-5 pb-6">
@@ -574,8 +578,8 @@ incluirTemplate("header");
     </div>
     <!-- Update modal -->
 
-    <?php foreach ($investigaciones as $investigacion): ?>
-        <div id="updateProductModal<?php echo $investigacion->id; ?>" tabindex="-1" aria-hidden="true"
+    <?php foreach ($usuarios as $usuario): ?>
+        <div id="updateProductModal<?php echo $usuario->id; ?>" tabindex="-1" aria-hidden="true"
             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-2xl max-h-full">
                 <!-- Modal content -->
@@ -583,10 +587,10 @@ incluirTemplate("header");
                     <!-- Modal header -->
                     <div
                         class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Actualizar Investigacion</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Actualizar Usuario</h3>
                         <button type="button"
                             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            data-modal-toggle="updateProductModal<?php echo $investigacion->id; ?>">
+                            data-modal-toggle="updateProductModal<?php echo $usuario->id; ?>">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -615,60 +619,58 @@ incluirTemplate("header");
                         </div>
                     <?php endforeach; ?>
                     <!--cierre alerta -->
-                    <form method="POST" action="/admin/Investigaciones/administrar.php" enctype="multipart/form-data">
+                    <form method="POST" action="/admin/Usuarios/administrar.php" enctype="multipart/form-data">
+                        <input type="number" name="id" class="hidden" value="<?php echo $usuario->id; ?>">
+                        <input type="text" name="imagenPrevia" class="hidden" value="<?php echo $usuario->imagen; ?>">
                         <div class="grid gap-4 mb-4 sm:grid-cols-2">
-                            <input type="number" name="investigacion[id]" class="hidden"
-                                value="<?php echo $investigacion->id; ?>">
-                            <input type="text" name="imagenPrevia" class="hidden"
-                                value="<?php echo $investigacion->imagen; ?>">
                             <div>
-                                <label for="titulo"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titulo</label>
-                                <input value="<?php echo s($investigacion->titulo); ?>" type="text"
-                                    name="investigacion[titulo]" id="titulo"
+                                <label for="email"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                <input value="<?php echo s($usuario->email); ?>" type="email" name="email" id="email"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Escribe el titulo" required="">
+                                    placeholder="Escribe el email" required="">
                             </div>
                             <div>
-                                <label for="autor"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Autor</label>
-                                <input value="<?php echo s($investigacion->autor); ?>" type="text"
-                                    name="investigacion[autor]" id="autor"
+                                <label for="nombre"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre
+                                    Completo</label>
+                                <input value="<?php echo s($usuario->nombre); ?>" type="text" name="nombre" id="nombre"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Nombre del Autor" required="">
+                                    placeholder="Escribre tu nombre" required="">
                             </div>
                             <div>
-                                <label for="fecha"
+                                <label for="fecha_nacimiento"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de
-                                    Publicacion</label>
-                                <input value="<?php echo date('Y-m-d', strtotime(s($investigacion->fecha_publicacion))); ?>"
-                                    type="date" name="investigacion[fecha_publicacion]" id="fecha"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="$2999" required="">
-                                <div class="sm:col-span-2 mt-2"><label for="resumen"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Resumen</label><textarea
-                                        id="resumen" name="investigacion[resumen]" rows="4"
-                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="Pon aqui el resumen de la investigacion"><?php echo s($investigacion->resumen); ?></textarea>
+                                    nacimiento</label>
+                                <input value="<?php echo date('Y-m-d', strtotime(s($usuario->fecha_nacimiento))); ?>"
+                                    type="date" name="fecha_nacimiento" id="fecha"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <div class="mt-6">
+                                    <label for="password"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                    <input value="<?php echo s($usuario->password); ?>" type="text" name="password"
+                                        id="password"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        placeholder="password" required="">
                                 </div>
                             </div>
                             <div class="flex  flex-col  w-full">
                                 <p class="block mb-2 text-sm font-medium  text-gray-900 dark:text-white">Imagen</p>
-                                <button data-popover-target="popover-modal<?php echo $investigacion->id; ?>" type="button"
+                                <button data-popover-target="popover-modal<?php echo $usuario->id; ?>" type="button"
                                     class="text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm px-5 py-2 mb-4 text-center dark:bg-emerald-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">ver</button>
-                                <div data-popover id="popover-modal<?php echo $investigacion->id; ?>" role="tooltip"
+                                <div data-popover id="popover-modal<?php echo $usuario->id; ?>" role="tooltip"
                                     class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
                                     <div
                                         class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
                                         <h3 class="font-semibold text-center text-gray-900 dark:text-white">imagen</h3>
                                     </div>
                                     <div class="px-3 py-2 flex align-center justify-center">
-                                        <img class="w-32 h-auto rounded-2"
-                                            src="/imagenes/<?php echo $investigacion->imagen ?>">
+                                        <img class="w-32 h-auto rounded-2" src="/imagenes/<?php echo $usuario->imagen ?>">
                                     </div>
                                     <div data-popper-arrow></div>
                                 </div>
-                                <label for="imagen<?php echo $investigacion->id; ?>"
+                                <p class="block mb-2 text-sm font-medium  text-gray-900 dark:text-white">Imagen Perfil</p>
+                                <label for="imagen"
                                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                     <div class=" flex flex-col items-center justify-center pt-5 pb-6">
                                         <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none"
@@ -682,16 +684,20 @@ incluirTemplate("header");
                                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX.
                                             800x400px)</p>
                                     </div>
-                                    <input id="imagen<?php echo $investigacion->id; ?>" name="investigacion[imagen]"
-                                        type="file" class="hidden" />
+                                    <input id="imagen" name="imagen" type="file" class="hidden" />
                                 </label>
                             </div>
                         </div>
-                        <div class="flex items-center space-x-4">
-                            <button type="submit" name="actualizar"
-                                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Update
-                                product</button>
-                        </div>
+                        <button type="submit" name="actualizar"
+                            class="text-white inline-flex items-center  bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewbox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Update
+                        </button>
                     </form>
                 </div>
             </div>
@@ -754,15 +760,15 @@ incluirTemplate("header");
         </div>
     </div>
     <!-- Delete modal -->
-    <?php foreach ($investigaciones as $investigacion): ?>
-        <div id="deleteModal<?php echo $investigacion->id; ?>" tabindex="-1" aria-hidden="true"
+    <?php foreach ($usuarios as $usuario): ?>
+        <div id="deleteModal<?php echo $usuario->id; ?>" tabindex="-1" aria-hidden="true"
             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-md max-h-full">
                 <!-- Modal content -->
                 <div class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
                     <button type="button"
                         class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                        data-modal-toggle="deleteModal<?php echo $investigacion->id; ?>">
+                        data-modal-toggle="deleteModal<?php echo $usuario->id; ?>">
                         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -779,13 +785,13 @@ incluirTemplate("header");
                     </svg>
                     <p class="mb-4 text-gray-500 dark:text-gray-300">Are you sure you want to delete this item?</p>
                     <div class="flex justify-center align-center items-center space-x-4">
-                        <button data-modal-toggle="deleteModal<?php echo $investigacion->id; ?>" type="button"
+                        <button data-modal-toggle="deleteModal<?php echo $usuario->id; ?>" type="button"
                             class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
                             cancel</button>
-                        <form method="POST" class="m-0" action="/admin/Investigaciones/administrar.php"
+                        <form method="POST" class="m-0" action="/admin/Usuarios/administrar.php"
                             enctype="multipart/form-data">
-                            <input type="number" name="id" class="hidden" value="<?php echo $investigacion->id; ?>">
-                            <input type="text" name="tipo" class="hidden" value="investigacion">
+                            <input type="number" name="id" class="hidden" value="<?php echo $usuario->id; ?>">
+                            <input type="text" name="tipo" class="hidden" value="usuario">
                             <button type="submit" name="borrar"
                                 class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">Yes,
                                 I'm sure</button>

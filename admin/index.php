@@ -75,16 +75,14 @@ incluirTemplate("header");
                                 d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z">
                             </path>
                         </svg>
-                        Code
+                        Users
                     </a>
-                    <h2 class="text-gray-900 dark:text-white text-3xl font-extrabold mb-2">Best react libraries around
-                        the web</h2>
+                    <h2 class="text-gray-900 dark:text-white text-3xl font-extrabold mb-2">Administrar Usuarios</h2>
                     <p class="text-lg font-normal text-gray-500 dark:text-gray-400 mb-4">Static websites are now used to
                         bootstrap lots of websites and are becoming the basis for a variety of tools that even influence
                         both web designers and developers.</p>
-                    <a href="#"
-                        class="text-blue-600 dark:text-blue-500 hover:underline font-medium text-lg inline-flex items-center">Read
-                        more
+                    <a href="/admin/Usuarios/administrar.php"
+                        class="text-blue-600 dark:text-blue-500 hover:underline font-medium text-lg inline-flex items-center">Administrar
                         <svg aria-hidden="true" class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2"
                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>

@@ -26,4 +26,31 @@ class Investigacion extends ActiveRecord
         $this->imagen = $args["imagen"] ?? "";
     }
 
+
+
+    public function validar()
+    {
+        if (!$this->titulo) {
+            self::$errores[] = "Debes añadir un titulo";
+        }
+
+        if (!$this->autor) {
+            self::$errores[] = "Debes añadir un autor";
+        }
+
+        if (!$this->resumen) {
+            self::$errores[] = "Debes añadir el resumen";
+        }
+
+        if (!$this->fecha_publicacion) {
+            self::$errores[] = "Debes añadir una fecha de publicación";
+        }
+
+        if (!$this->imagen) {
+            self::$errores[] = "La imagen es obligatoria";
+        }
+
+        return self::$errores;
+    }
+
 }
